@@ -26,9 +26,9 @@ export const HeroSmall: FC<HeroSmallProps> = ({
   genres,
   breadcrumbPage,
 }) => {
+  const path = usePathname();
   let arrayPath;
   if (breadcrumb || breadcrumbPage) {
-    const path = usePathname();
     arrayPath = path.split("/").filter(Boolean);
   }
   return (

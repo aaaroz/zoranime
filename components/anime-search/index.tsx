@@ -13,7 +13,11 @@ interface SearchAnimeProps {
 const SearchAnime: FC<SearchAnimeProps> = ({ keyword, searchAnime }) => {
   return (
     <div>
-      <h1 className="text-2xl font-bold capitalize">Search for '{keyword}'</h1>
+      <h1 className="text-2xl font-bold">
+        Search results for {`'`}
+        {keyword}
+        {`'`}
+      </h1>
       {searchAnime.data.length <= 0 ? (
         <div className="gap-3 flex flex-col items-center justify-center h-[50dvh]">
           <SearchIcon className="h-12 w-10 text-neutral-400" />

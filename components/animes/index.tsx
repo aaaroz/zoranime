@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { getAnimeResponse } from "@/lib/apis";
@@ -16,7 +16,7 @@ const AnimeLists = () => {
   const currentPage = Number(searchParams?.get("page")) || 1;
   const [dataAnime, setDataAnime] = useState<TAnime | null>(null);
 
-  const fetchAnime = async () => {
+  const fetchAnime = useCallback(async () => {
     try {
       const res = await getAnimeResponse(
         "anime",
@@ -26,15 +26,15 @@ const AnimeLists = () => {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [currentPage]);
 
   useEffect(() => {
     fetchAnime();
-  }, [currentPage]);
+  }, [currentPage, fetchAnime]);
   return (
     <>
       {dataAnime && dataAnime.data?.length > 0 && (
-        <AnimeList api={dataAnime} pagination />
+        <AnimeList api={dataAnime} large />
       )}
       {dataAnime && dataAnime.data?.length <= 0 && (
         <Card>

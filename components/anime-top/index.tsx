@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { getAnimeResponse } from "@/lib/apis";
@@ -16,7 +16,7 @@ const TopAnimeList = () => {
   const currentPage = Number(searchParams?.get("page")) || 1;
   const [topAnime, setTopAnime] = useState<TTopAnime | null>(null);
 
-  const fetchAnime = async () => {
+  const fetchAnime = useCallback(async () => {
     try {
       const res = await getAnimeResponse(
         "top/anime",
@@ -26,11 +26,11 @@ const TopAnimeList = () => {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [currentPage]);
 
   useEffect(() => {
     fetchAnime();
-  }, [currentPage]);
+  }, [currentPage, fetchAnime]);
   return (
     <>
       {topAnime && topAnime.data?.length > 0 && (

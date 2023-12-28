@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,7 +17,7 @@ const RecommendedAnimeList = () => {
   const [dataRecommendedAnime, setDataRecommendedAnime] =
     useState<TFullRecommendedAnime | null>(null);
 
-  const fetchAnime = async () => {
+  const fetchAnime = useCallback(async () => {
     try {
       const res: TFullRecommendedAnime = await getAnimeResponse(
         "recommendations/anime",
@@ -28,11 +28,11 @@ const RecommendedAnimeList = () => {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [currentPage]);
 
   useEffect(() => {
     fetchAnime();
-  }, [currentPage]);
+  }, [currentPage, fetchAnime]);
 
   return (
     <>
