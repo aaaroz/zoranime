@@ -8,6 +8,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { Tooltip, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { TooltipContent } from "@radix-ui/react-tooltip";
+import { cn } from "@/lib/utils";
 
 interface CustomPaginationProps {
   currentPage: number;
@@ -15,7 +18,7 @@ interface CustomPaginationProps {
   pageNumberLimit: number;
 }
 
-const CustomPagination: React.FC<CustomPaginationProps> = ({
+export const CustomPagination: React.FC<CustomPaginationProps> = ({
   currentPage,
   lastPage,
   pageNumberLimit,
@@ -53,19 +56,20 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
   const renderPageNumbers = pages.map((number, index) => {
     if (number >= minPageNumberLimit && number <= maxPageNumberLimit) {
       return (
-        <PaginationItem key={index}>
-          <PaginationLink
-            href={`?page=${number}`}
-            isActive={currentPage === number}
-            className={
-              currentPage === number
-                ? "pointer-events-none"
-                : "pointer-events-auto hover:bg-neutral-200 dark:hover:bg-neutral-900"
-            }
-          >
-            {number}
-          </PaginationLink>
-        </PaginationItem>
+        <PaginationLink
+          key={index}
+          href={`?page=${number}`}
+          isActive={currentPage === number}
+          className={cn(
+            "hidden md:flex",
+
+            currentPage === number
+              ? "pointer-events-none"
+              : "pointer-events-auto hover:bg-neutral-200 dark:hover:bg-neutral-900"
+          )}
+        >
+          {number}
+        </PaginationLink>
       );
     } else {
       return null;
@@ -74,20 +78,47 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
 
   const pageIncrementBtn =
     maxPageNumberLimit < totalPages ? (
-      <PaginationItem>
-        <Link href={`?page=${currentPage + 5}`}>
-          <PaginationEllipsis />
-        </Link>
-      </PaginationItem>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <PaginationItem>
+              <Link
+                href={`?page=${
+                  currentPage + 5 >= totalPages ? totalPages : currentPage + 5
+                }`}
+                className="hidden md:block"
+              >
+                <PaginationEllipsis />
+              </Link>
+            </PaginationItem>
+          </TooltipTrigger>
+          <TooltipContent className="text-xs bg-neutral-100 dark:bg-black py-2 px-5 rounded">
+            Jump to page{" "}
+            {currentPage + 5 >= totalPages ? totalPages : currentPage + 5}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     ) : null;
 
   const pageDecrementBtn =
     minPageNumberLimit > 1 ? (
-      <PaginationItem>
-        <Link href={`?page=${currentPage - 5 <= 0 ? 1 : currentPage - 5}`}>
-          <PaginationEllipsis />
-        </Link>
-      </PaginationItem>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <PaginationItem>
+              <Link
+                href={`?page=${currentPage - 5 <= 0 ? 1 : currentPage - 5}`}
+                className="hidden md:block"
+              >
+                <PaginationEllipsis />
+              </Link>
+            </PaginationItem>
+          </TooltipTrigger>
+          <TooltipContent className="text-xs bg-neutral-100 dark:bg-black py-2 px-5 rounded">
+            Jump to page {currentPage - 5 <= 0 ? 1 : currentPage - 5}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     ) : null;
 
   return (
@@ -116,5 +147,3 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
     </Pagination>
   );
 };
-
-export default CustomPagination;

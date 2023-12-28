@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { usePathname } from "next/navigation";
 
 import { Badge } from "@/components/ui/badge";
@@ -17,27 +17,29 @@ interface HeroSmallProps {
   title: string;
   breadcrumb?: boolean;
   genres?: Genres[];
+  breadcrumbPage?: string;
 }
 
 export const HeroSmall: FC<HeroSmallProps> = ({
   title,
   breadcrumb,
   genres,
+  breadcrumbPage,
 }) => {
   let arrayPath;
-  if (breadcrumb) {
+  if (breadcrumb || breadcrumbPage) {
     const path = usePathname();
     arrayPath = path.split("/").filter(Boolean);
   }
   return (
     <>
-      <div className="relative p-10 pt-8 pr-16 bg-neutral-100 dark:bg-neutral-800">
+      <div className="relative p-5 md:p-10 pt-8 bg-neutral-100 dark:bg-neutral-800">
         <Image
           src="/images/hero-2-light.png"
           alt="Hero Small"
           width={1400}
           height={200}
-          className="max-h-[200px] w-full object-cover dark:hidden"
+          className="min-h-[200px] w-full object-cover dark:hidden"
         />
         <Image
           src="/images/hero-2-dark.png"
@@ -46,11 +48,14 @@ export const HeroSmall: FC<HeroSmallProps> = ({
           height={200}
           className="min-h-[200px] max-h-[200px] w-full object-cover hidden dark:block"
         />
-        <div className="absolute top-20 left-14">
-          <h1 className="text-3xl font-bold text-black dark:text-white">
+        <div className="absolute top-12 md:top-28 left-10 md:left-20">
+          <h1 className="capitalize text-3xl font-bold text-black dark:text-white">
             {title}
           </h1>
           {breadcrumb && arrayPath && <Breadcrumb path={arrayPath} />}
+          {breadcrumbPage && arrayPath && (
+            <Breadcrumb path={arrayPath} page={breadcrumbPage} />
+          )}
           {genres?.map((genre) => (
             <Badge
               key={genre.mal_id}

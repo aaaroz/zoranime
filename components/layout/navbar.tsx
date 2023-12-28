@@ -16,6 +16,7 @@ import {
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { InputSearch } from "./input-search";
 
 export const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +48,7 @@ export const Navbar: FC = () => {
           </div>
         </div>
         <nav
-          className={`absolute left-0 w-full pb-5 px-11 font-semibold bg-white dark:bg-neutral-800
+          className={`absolute z-50 left-0 w-full pb-5 px-11 font-semibold bg-white dark:bg-neutral-800
       md:static md:z-auto md:flex md:w-auto md:items-center md:gap-6 md:pb-0 md:pl-0 lg:gap-11 ${
         isOpen ? "top-16" : "top-[-300px] hidden"
       }`}
@@ -81,11 +82,7 @@ export const Navbar: FC = () => {
             </li>
           </ul>
           <div className="md:flex items-center space-x-2 space-y-4 justify-end md:space-y-0">
-            <Input aria-label="Search bar" placeholder="Search Anime...">
-              <button type="submit" aria-label="Search">
-                <IoSearch />
-              </button>
-            </Input>
+            <InputSearch />
             <div className="hidden md:block">
               <ThemeSwitcher />
             </div>

@@ -6,7 +6,7 @@ export const Star = ({
   scoredBy,
 }: {
   score: number;
-  scoredBy: number;
+  scoredBy?: number;
 }) => {
   const rating = score / 2;
   const ratingStar = Array.from({ length: 5 }, (_, index) => {
@@ -27,7 +27,7 @@ export const Star = ({
   return (
     <div className="flex flex-col lg:flex-row text-sm gap-1">
       <span className="flex">{ratingStar}</span>
-      <p className="text-xs">({scoredBy} reviews)</p>
+      {scoredBy && <p className="text-xs">({scoredBy} reviews)</p>}
     </div>
   );
 };

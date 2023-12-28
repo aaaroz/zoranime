@@ -1,5 +1,13 @@
 import { TRecommendedAnime } from "@/types";
 
+export const getMangaFullById = async (id: number) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/manga/${id}/full`
+  );
+  const manga = await response.json();
+  return manga;
+};
+
 export const getAnimeFullById = async (id: number) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/anime/${id}/full`

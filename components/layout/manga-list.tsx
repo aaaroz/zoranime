@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -17,15 +18,14 @@ import {
 } from "@/components/ui/tooltip";
 import { Star } from "@/components/ui/star";
 
-import type { TAnime, TTopAnime } from "@/types";
-import { cn } from "@/lib/utils";
+import type { TManga } from "@/types";
 
-interface AnimeListProps {
-  api: TTopAnime | TAnime;
+interface MangaListProps {
+  api: TManga;
   large?: boolean;
 }
 
-export const AnimeList: FC<AnimeListProps> = ({ api, large }) => {
+export const MangaList: FC<MangaListProps> = ({ api, large }) => {
   return (
     <>
       <div
@@ -37,7 +37,7 @@ export const AnimeList: FC<AnimeListProps> = ({ api, large }) => {
         {api.data?.map((anime, index) => {
           return (
             <Link
-              href={`/anime/${anime.mal_id}`}
+              href={`/manga/${anime.mal_id}`}
               className=" transition-all"
               key={index}
             >
@@ -79,8 +79,10 @@ export const AnimeList: FC<AnimeListProps> = ({ api, large }) => {
                     <span className="text-xs">Views</span>
                   </div>
                   <div className="flex flex-col text-center">
-                    <p className="text-sm font-semibold">{anime.episodes}</p>
-                    <span className="text-xs ">Episodes</span>
+                    <p className="text-sm font-semibold">
+                      {anime.chapters ? anime.chapters : "1"}
+                    </p>
+                    <span className="text-xs ">Chapters</span>
                   </div>
                 </CardFooter>
               </Card>

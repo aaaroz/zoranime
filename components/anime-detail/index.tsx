@@ -8,21 +8,31 @@ import { Badge } from "@/components/ui/badge";
 import { Star } from "@/components/ui/star";
 import { Card } from "@/components/ui/card";
 import { Separator } from "../ui/separator";
+import Link from "next/link";
+import { Breadcrumb } from "../ui/breadcrumb";
+import { usePathname } from "next/navigation";
 
 const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
+  let arrayPath;
+  const path = usePathname();
+  arrayPath = path.split("/").filter(Boolean);
   return (
     <>
       <div className="flex flex-col md:flex-row">
         <Image
           src={dataAnime.data.images.webp.large_image_url}
           alt="image"
-          width={450}
+          width={500}
           height={350}
           className="hover-image w-full md:w-auto max-h-96 object-cover rounded-sm transition-all"
         />
-        <Card className="my-5 md:my-0 ml-5 flex flex-col border-0 min-h-full w-full justify-between col-span-1">
+        <Card className="my-5 md:my-0 md:ml-5 flex flex-col border-0 min-h-full w-full justify-between col-span-1">
+          <div className="hidden md:block mx-8 my-2">
+            <Breadcrumb path={arrayPath} page={dataAnime.data.title} />
+            <Separator className="my-2" />
+          </div>
           <YouTube
-            className="w-full h-full"
+            className="md:p-8 md:pt-0 w-full h-full"
             videoId={dataAnime.data.trailer.youtube_id}
             onReady={(event) => event.target.pauseVideo()}
             opts={{
@@ -38,7 +48,7 @@ const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
           score={dataAnime.data.score}
           scoredBy={dataAnime.data.scored_by}
         />
-        <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-row flex-wrap justify-center items-center gap-2 text-xs md:text-sm">
           <Badge>Rank #{dataAnime.data.rank}</Badge>
           <Badge>Popularity #{dataAnime.data.popularity}</Badge>
           <Badge>Members #{dataAnime.data.members}</Badge>
@@ -74,6 +84,13 @@ const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
             </li>
           ))}
         </ol>
+        <Link
+          href={dataAnime.data.url}
+          target="_blank"
+          className="mt-4 text-sm hover:text-red-600"
+        >
+          Visit Official Website
+        </Link>
       </div>
     </>
   );

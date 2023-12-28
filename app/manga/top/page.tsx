@@ -1,20 +1,20 @@
 import { Metadata } from "next";
 
-import TopAnimeList from "@/components/anime-top";
+import TopMangaList from "@/components/manga-top";
 import { HeroSmall } from "@/components/layout/hero-small";
 
 export const metadata: Metadata = {
-  title: "Top Anime",
+  title: "Top Manga",
 };
-const TopAnime = () => {
+const TopManga = () => {
   return (
     <>
-      <HeroSmall title="Top Anime" breadcrumb />
+      <HeroSmall title="Top Manga" breadcrumb />
       <section className="px-5 md:px-10 bg-neutral-50 dark:bg-neutral-800 dark:text-white">
-        <TopAnimeList />
+        <TopMangaList />
       </section>
     </>
   );
 };
 
-export default TopAnime;
+export default TopManga;
