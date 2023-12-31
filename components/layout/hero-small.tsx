@@ -39,16 +39,16 @@ export const HeroSmall: FC<HeroSmallProps> = ({
           alt="Hero Small"
           width={1400}
           height={200}
-          className="min-h-[200px] w-full object-cover dark:hidden"
+          className="min-h-[200px] w-auto object-cover dark:hidden"
         />
         <Image
           src="/images/hero-2-dark.png"
           alt="Hero Small"
           width={1400}
           height={200}
-          className="min-h-[200px] max-h-[200px] w-full object-cover hidden dark:block"
+          className="min-h-[200px] w-auto object-cover hidden dark:block"
         />
-        <div className="absolute top-12 md:top-28 left-10 md:left-20">
+        <div className="absolute top-20 md:top-28 left-10 md:left-20">
           <h1 className="capitalize text-3xl font-bold text-black dark:text-white">
             {title}
           </h1>

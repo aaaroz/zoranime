@@ -36,7 +36,7 @@ export const TabsAnime = ({ dataNow, dataUpcoming }: TabsAnimeProps) => {
       </TabsList>
       <TabsContent value="now">
         <Card className="rounded-md border-none bg-neutral-100 dark:bg-neutral-700">
-          {dataNow.data.map((anime, index) => (
+          {dataNow.data?.map((anime, index) => (
             <Link href={`/anime/${anime.mal_id}`} key={index}>
               <CardContent className="p-3 pb-0">
                 <div className="flex">
@@ -78,7 +78,7 @@ export const TabsAnime = ({ dataNow, dataUpcoming }: TabsAnimeProps) => {
       </TabsContent>
       <TabsContent value="upcoming">
         <Card className="rounded-md border-none bg-neutral-100 dark:bg-neutral-700">
-          {dataUpcoming.data.map((anime, index) => (
+          {dataUpcoming.data?.map((anime, index) => (
             <Link href={`/anime/${anime.mal_id}`} key={index}>
               <CardContent className="p-3 pb-0">
                 <div className="flex">

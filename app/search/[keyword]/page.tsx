@@ -2,6 +2,11 @@ import SearchAnime from "@/components/anime-search";
 import { HeroSmall } from "@/components/layout/hero-small";
 import { getAnimeResponse } from "@/lib/apis";
 import type { TAnime } from "@/types";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Search",
+};
 
 const Search = async ({ params }: { params: { keyword: string } }) => {
   const { keyword } = params;

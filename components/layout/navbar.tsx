@@ -1,10 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { LogoText } from "./logo-text";
-import { IoCloseSharp, IoSearch } from "react-icons/io5";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { ChevronDown } from "lucide-react";
 
 import {
@@ -14,17 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+
 import { InputSearch } from "./input-search";
+import { AuthButton } from "../auth/auth-button";
+import { SheetNavbar } from "./sheet-navbar";
 
 export const Navbar: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpen = () => {
-    setIsOpen((prev) => !prev);
-  };
-
   return (
     <header className="bg-white py-3 px-3 sm:px-10 dark:bg-neutral-800 dark:text-white overflow-hidden">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center">
@@ -32,26 +23,16 @@ export const Navbar: FC = () => {
           <Link href="/">
             <LogoText />
           </Link>
-          <div className="flex gap-2 md:hidden">
+          <div className="flex items-center gap-2 md:hidden">
             <ThemeSwitcher />
-            <Button
-              aria-label="Open menu"
-              onClick={handleOpen}
-              className="block bg-white border transition-all text-black hover:bg-neutral-100 md:hidden dark:bg-black dark:text-white dark:hover:bg-inherit dark:hover:text-white dark:border-0"
-            >
-              {isOpen ? (
-                <IoCloseSharp className="text-base" />
-              ) : (
-                <GiHamburgerMenu className="text-base" />
-              )}
-            </Button>
+            <AuthButton />
+            <SheetNavbar />
           </div>
         </div>
         <nav
-          className={`absolute z-50 left-0 w-full pb-5 px-11 font-semibold bg-white dark:bg-neutral-800
-      md:static md:z-auto md:flex md:w-auto md:items-center md:gap-6 md:pb-0 md:pl-0 lg:gap-11 ${
-        isOpen ? "top-16" : "top-[-300px] hidden"
-      }`}
+          className="absolute z-50 left-0 w-full pb-5 px-11 font-semibold bg-white dark:bg-neutral-800
+      md:static md:z-auto md:flex md:w-auto md:items-center md:gap-6 md:pb-0 md:pl-0 lg:gap-11 
+     top-[-300px] hidden transition-all duration-500 ease-in-out"
         >
           <ul className="block md:flex space-x-2 space-y-4 mb-4 md:mb-0 md:space-y-0 md:space-x-5">
             <li>
@@ -83,8 +64,9 @@ export const Navbar: FC = () => {
           </ul>
           <div className="md:flex items-center space-x-2 space-y-4 justify-end md:space-y-0">
             <InputSearch />
-            <div className="hidden md:block">
+            <div className="hidden md:flex items-center gap-1">
               <ThemeSwitcher />
+              <AuthButton />
             </div>
           </div>
         </nav>

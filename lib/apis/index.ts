@@ -38,17 +38,17 @@ export const getNestedAnimeResponse = async (
   objectProperty: string
 ) => {
   const response = await getAnimeResponse(resource);
-  return response.data.flatMap(
+  return response.data?.flatMap(
     (item: { [key: string]: unknown }) => item[objectProperty]
   );
 };
 
 export const reproduce = (data: TRecommendedAnime[], gap: number) => {
-  const first = ~~(Math.random() * (data.length - gap) + 1);
+  const first = ~~(Math.random() * (data?.length - gap) + 1);
   const last = first + gap;
 
   const response = {
-    data: data.slice(first, last),
+    data: data?.slice(first, last),
   };
 
   return response;
