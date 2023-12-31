@@ -8,7 +8,7 @@ export const getMangaFullById = async (id: number) => {
   return manga;
 };
 
-export const getAnimeFullById = async (id: number) => {
+export const getAnimeFullById = async (id: number | string) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/anime/${id}/full`
   );

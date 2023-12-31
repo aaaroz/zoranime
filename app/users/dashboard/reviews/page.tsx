@@ -12,6 +12,9 @@ const Reviews: FC = () => {
     <>
       <HeroSmall title="My Reviews" breadcrumb />
       <Loading />
+      {/* <div className="content h-screen bg-green-700 relative">
+        <div className="blue-rounded rounded-tl-full h-96 w-72 bg-blue-300 absolute right-0"></div>
+      </div> */}
     </>
   );
 };

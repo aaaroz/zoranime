@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import Providers from "@/components/auth/providers";
+import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
@@ -40,6 +41,7 @@ export default function RootLayout({
             <main className="min-h-screen">{children}</main>
             <Footer />
             <ScrollToTop />
+            <Toaster />
           </ThemeProvider>
         </Providers>
       </body>

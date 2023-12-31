@@ -2,7 +2,6 @@ import {
   ButtonHTMLAttributes,
   InputHTMLAttributes,
   PropsWithChildren,
-  PropsWithRef,
 } from "react";
 
 export type TButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
