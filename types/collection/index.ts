@@ -6,6 +6,14 @@ export type TAnimeCollection = {
   user_email: string;
 };
 
+export type TMangaCollection = {
+  id?: number;
+  mal_id: string;
+  image_url?: string | null;
+  title?: string | null;
+  user_email: string;
+};
+
 export interface RequestCollection<T> {
   json(): T | PromiseLike<T>;
 }

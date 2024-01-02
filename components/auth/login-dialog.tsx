@@ -41,26 +41,49 @@ export const LoginDialog: FC<Props> = ({ classNames, pathname }) => {
           When you sign in, you can add anime/manga to your own collection list,
           then you also can add your comment for the anime/manga.
         </DialogDescription>
-        <div className="flex flex-col gap-2">
-          <DialogClose asChild>
-            <Button
-              onClick={() => signIn("github", { callbackUrl: `${pathname}` })}
-              className="w-full dark:text-white dark:bg-neutral-800  dark:hover:bg-neutral-900"
-            >
-              Sign In with GitHub
-              <GithubIcon className="ml-2 w-5 h-5" />
-            </Button>
-          </DialogClose>
-          <DialogClose asChild>
-            <Button
-              onClick={() => signIn("google")}
-              className="w-full dark:text-white dark:bg-neutral-800  dark:hover:bg-neutral-900"
-            >
-              Sign In with Google
-              <FaGoogle className="ml-2 text-base font-thin" />
-            </Button>
-          </DialogClose>
-        </div>
+        {pathname ? (
+          <div className="flex flex-col gap-2">
+            <DialogClose asChild>
+              <Button
+                onClick={() => signIn("github", { callbackUrl: `${pathname}` })}
+                className="w-full dark:text-white dark:bg-neutral-800  dark:hover:bg-neutral-900"
+              >
+                Sign In with GitHub
+                <GithubIcon className="ml-2 w-5 h-5" />
+              </Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button
+                onClick={() => signIn("google", { callbackUrl: `${pathname}` })}
+                className="w-full dark:text-white dark:bg-neutral-800  dark:hover:bg-neutral-900"
+              >
+                Sign In with Google
+                <FaGoogle className="ml-2 text-base font-thin" />
+              </Button>
+            </DialogClose>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-2">
+            <DialogClose asChild>
+              <Button
+                onClick={() => signIn("github")}
+                className="w-full dark:text-white dark:bg-neutral-800  dark:hover:bg-neutral-900"
+              >
+                Sign In with GitHub
+                <GithubIcon className="ml-2 w-5 h-5" />
+              </Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button
+                onClick={() => signIn("google")}
+                className="w-full dark:text-white dark:bg-neutral-800  dark:hover:bg-neutral-900"
+              >
+                Sign In with Google
+                <FaGoogle className="ml-2 text-base font-thin" />
+              </Button>
+            </DialogClose>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

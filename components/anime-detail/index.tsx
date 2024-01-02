@@ -1,21 +1,33 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import YouTube from "react-youtube";
+import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
-import type { TFullAnime } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { Star } from "@/components/ui/star";
 import { Card } from "@/components/ui/card";
-import { Separator } from "../ui/separator";
-import Link from "next/link";
-import { Breadcrumb } from "../ui/breadcrumb";
-import { usePathname } from "next/navigation";
+import { Separator } from "@/components/ui/separator";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import type { TFullAnime } from "@/types";
+import { CommentInput } from "../layout/comment-input";
+import { CommentSection } from "../layout/comment-section";
 
 const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
   let arrayPath;
   const path = usePathname();
   arrayPath = path.split("/").filter(Boolean);
+
+  const user = useSession();
+
+  const data = {
+    username: user.data?.user?.name as string,
+    user_email: user.data?.user?.email as string,
+    user_image: user.data?.user?.image as string,
+    anime_mal_id: arrayPath[1] as string,
+  };
   return (
     <>
       <div className="flex flex-col md:flex-row">
@@ -57,13 +69,13 @@ const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
         </div>
         <p className="text-xs text-center">{dataAnime.data.background}</p>
       </div>
-      <div className="py-8 pb-14">
-        <h3 className="text-base">
+      <div className="py-8 pb-14 text-sm md:text-base">
+        <h3>
           {dataAnime.data.duration} | {dataAnime.data.rating} |{" "}
           {dataAnime.data.status}
         </h3>
         <Separator className="my-2 dark:bg-slate-50" />
-        <p className="text-base text-justify mt-2">{dataAnime.data.synopsis}</p>
+        <p className=" text-justify mt-2">{dataAnime.data.synopsis}</p>
         <ul className="mt-2">
           Soundtrack List :
           {dataAnime.data.theme.openings.map((opening, index) => (
@@ -87,7 +99,7 @@ const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
         <Link
           href={dataAnime.data.url}
           target="_blank"
-          className="mt-4 text-sm hover:text-red-600"
+          className="mt-4 text-sm hover:text-red-600 hover:underline"
         >
           Visit Official Website
         </Link>

@@ -25,7 +25,7 @@ const MangaDetail: FC<MangaDetailProps> = ({ dataManga }) => {
     <>
       <div className="flex flex-col md:flex-row">
         <Image
-          src={dataManga.data.images.webp.large_image_url}
+          src={dataManga.data.images.webp.image_url}
           alt="image"
           width={500}
           height={350}

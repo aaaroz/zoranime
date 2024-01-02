@@ -103,7 +103,7 @@ export const TabsAnime = ({ dataNow, dataUpcoming }: TabsAnimeProps) => {
                     <p className="text-xs">
                       Episode {anime.episodes}, Source: {anime.source}
                     </p>
-                    <p className="text-xs font-semibold text-red-600">
+                    <p className="text-xs font-semibold text-red-800 dark:text-red-600">
                       {anime.popularity} Views
                     </p>
                   </div>

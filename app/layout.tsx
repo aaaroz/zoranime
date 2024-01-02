@@ -41,7 +41,7 @@ export default function RootLayout({
             <main className="min-h-screen">{children}</main>
             <Footer />
             <ScrollToTop />
-            <Toaster />
+            <Toaster position="top-right" />
           </ThemeProvider>
         </Providers>
       </body>

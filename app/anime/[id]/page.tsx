@@ -5,9 +5,11 @@ import { HeroSmall } from "@/components/layout/hero-small";
 import { getAnimeFullById } from "@/lib/apis";
 import { ButtonAddCollection } from "@/components/layout/button-add-collection";
 
-import type { TFullAnime } from "@/types";
+import prisma from "@/lib/prisma";
 import { authUserSession } from "@/lib/utils";
-import APICollection from "@/lib/apis/collection";
+import type { TFullAnime } from "@/types";
+import { CommentSection } from "@/components/layout/comment-section";
+import { CommentInput } from "@/components/layout/comment-input";
 
 export const metadata: Metadata = {
   title: "Anime Detail",
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
 
 const Anime = async ({ params }: { params: { id: string } }) => {
   const dataAnime: TFullAnime = await getAnimeFullById(params.id);
-  metadata.title = dataAnime.data.title;
+  metadata.title = dataAnime?.data?.title;
   const user = await authUserSession();
   const data = {
     user_email: user?.email as string,
@@ -23,6 +25,15 @@ const Anime = async ({ params }: { params: { id: string } }) => {
     anime_image_url: dataAnime.data.images.webp.large_image_url,
     anime_title: dataAnime.data.title,
   };
+
+  const dataComment = {
+    username: user?.name as string,
+    user_email: user?.email as string,
+    user_image: user?.image as string,
+    anime_mal_id: params.id,
+    anime_title: dataAnime.data.title,
+  };
+
   const collection = await prisma.collection.findFirst({
     where: { user_email: user?.email as string, anime_mal_id: params.id },
   });
@@ -31,8 +42,10 @@ const Anime = async ({ params }: { params: { id: string } }) => {
     <>
       <HeroSmall title={dataAnime.data.title} genres={dataAnime.data.genres} />
       {user && !collection && <ButtonAddCollection data={data} />}
-      <section className="px-2 md:px-10 bg-neutral-100 dark:bg-neutral-800 dark:text-white">
+      <section className="px-2 pb-8 md:px-10 bg-neutral-100 dark:bg-neutral-800 dark:text-white">
         <AnimeDetail dataAnime={dataAnime} />
+        <CommentSection anime_mal_id={params.id} />
+        {user && <CommentInput data={dataComment} />}
       </section>
     </>
   );

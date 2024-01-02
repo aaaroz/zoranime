@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import type { RequestCollection, TAnimeCollection } from "@/types/collection";
+import type { RequestCollection, TAnimeCollection } from "@/types";
 
 export async function POST(req: RequestCollection<TAnimeCollection>) {
   const { anime_mal_id, anime_image_url, anime_title, user_email } =

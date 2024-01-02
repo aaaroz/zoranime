@@ -6,11 +6,10 @@ import { Input } from "@/components/ui/input";
 import {
   type FormEvent,
   useRef,
-  MutableRefObject,
-  FormEventHandler,
   InputHTMLAttributes,
   ReactNode,
   RefAttributes,
+  useState,
 } from "react";
 import { useRouter } from "next/navigation";
 
@@ -20,6 +19,7 @@ type FormEvents = InputHTMLAttributes<HTMLInputElement> & {
   FormEvent;
 
 export const InputSearch = () => {
+  const [keyword, setKeyword] = useState("");
   const searchRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -33,6 +33,7 @@ export const InputSearch = () => {
 
     event.preventDefault();
     router.push(`/search/${keyword.trim()}`);
+    setKeyword("");
   };
   return (
     <form onSubmit={handleSearch}>
@@ -40,6 +41,8 @@ export const InputSearch = () => {
         aria-label="Search bar"
         placeholder="Search Anime..."
         ref={searchRef}
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
       >
         <button type="submit" aria-label="Search">
           <IoSearch />

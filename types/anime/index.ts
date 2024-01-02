@@ -593,7 +593,7 @@ export type TRecommendedAnime = {
 
 export type TFullAnime = {
   data: {
-    mal_id: 0;
+    mal_id: 0 | string;
     url: "string";
     images: {
       jpg: {

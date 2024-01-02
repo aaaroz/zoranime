@@ -6,6 +6,7 @@ declare global {
 }
 
 let prisma: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>;
+
 if (process.env.NODE_ENV === "production") {
   prisma = new PrismaClient();
 } else {

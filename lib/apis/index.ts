@@ -1,6 +1,6 @@
 import { TRecommendedAnime } from "@/types";
 
-export const getMangaFullById = async (id: number) => {
+export const getMangaFullById = async (id: number | string) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/manga/${id}/full`
   );
@@ -9,11 +9,15 @@ export const getMangaFullById = async (id: number) => {
 };
 
 export const getAnimeFullById = async (id: number | string) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/anime/${id}/full`
-  );
-  const anime = await response.json();
-  return anime;
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/anime/${id}/full`
+    );
+    const anime = await response.json();
+    return anime;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const getAnimeResponse = async (resource: string, query?: string) => {
@@ -27,7 +31,7 @@ export const getAnimeResponse = async (resource: string, query?: string) => {
 export const getRandomAnimeResponse = async (resource: string) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}`,
-    { next: { revalidate: 50 } }
+    { next: { revalidate: 20 } }
   );
   const anime = await response.json();
   return anime;

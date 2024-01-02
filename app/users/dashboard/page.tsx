@@ -38,10 +38,10 @@ const Dashboard = async (props: Props) => {
             </div>
             <div className="flex justify-center md:justify-normal gap-2 md:min-h-[30dvh]">
               <Link href="/users/dashboard/collections">
-                <Button>My Collection</Button>
+                <Button>My Collections</Button>
               </Link>
-              <Link href="/users/dashboard/reviews">
-                <Button>My Reviews</Button>
+              <Link href="/users/dashboard/comments">
+                <Button>My Comments</Button>
               </Link>
             </div>
           </div>

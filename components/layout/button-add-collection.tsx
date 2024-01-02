@@ -6,28 +6,42 @@ import { toast } from "sonner";
 
 import APICollection from "@/lib/apis/collection";
 import { Button } from "@/components/ui/button";
-import type { TAnimeCollection } from "@/types";
+import type { TAnimeCollection, TMangaCollection } from "@/types";
 
 type Props = {
-  data: TAnimeCollection;
+  data?: TAnimeCollection;
+  dataManga?: TMangaCollection;
 };
 
-export const ButtonAddCollection = ({ data }: Props) => {
+export const ButtonAddCollection = ({ data, dataManga }: Props) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    toast.promise(APICollection.addCollection(data), {
-      loading: "Loading... ",
-      success: (data) => `${data.message}`,
-      error: "Failed to add to Collection",
-      finally: () => {
-        setIsSubmitting(false);
-        router.refresh();
-      },
-    });
+    if (data) {
+      toast.promise(APICollection.addCollection(data), {
+        loading: "Loading... ",
+        success: (data) => `${data.message}`,
+        error: "Failed to add to Collection",
+        finally: () => {
+          setIsSubmitting(false);
+          router.refresh();
+        },
+      });
+    }
+    if (dataManga) {
+      toast.promise(APICollection.addMangaCollection(dataManga), {
+        loading: "Loading... ",
+        success: (data) => `${data.message}`,
+        error: "Failed to add to Collection",
+        finally: () => {
+          setIsSubmitting(false);
+          router.refresh();
+        },
+      });
+    }
   };
 
   return (

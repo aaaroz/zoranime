@@ -19,3 +19,37 @@ model Collection {
 
   @@unique([anime_mal_id, user_email])
 }
+
+model Comment {
+  id           Int      @id @default(autoincrement())
+  anime_mal_id String
+  anime_title  String
+  user_email   String
+  username     String
+  user_image   String?
+  comment      String
+  rating       Int
+  createdAt    DateTime @default(now())
+}
+
+model MangaCollection {
+  id         Int     @id @default(autoincrement())
+  mal_id     String
+  image_url  String?
+  title      String?
+  user_email String
+
+  @@unique([mal_id, user_email])
+}
+
+model MangaComment {
+  id         Int      @id @default(autoincrement())
+  mal_id     String
+  title      String
+  user_email String
+  username   String
+  user_image String?
+  comment    String
+  rating     Int
+  createdAt  DateTime @default(now())
+}
