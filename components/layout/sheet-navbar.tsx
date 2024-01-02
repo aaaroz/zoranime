@@ -15,6 +15,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Link from "next/link";
+import { InputSearch } from "./input-search";
 
 export const SheetNavbar = () => {
   return (
@@ -66,6 +67,7 @@ export const SheetNavbar = () => {
               </p>
             </Link>
           </div>
+          <InputSearch />
         </SheetHeader>
       </SheetContent>
     </Sheet>

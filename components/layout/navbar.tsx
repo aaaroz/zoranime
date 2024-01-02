@@ -10,9 +10,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher";
+import { AuthButton } from "@/components/auth/auth-button";
 
 import { InputSearch } from "./input-search";
-import { AuthButton } from "../auth/auth-button";
 import { SheetNavbar } from "./sheet-navbar";
 
 export const Navbar: FC = () => {

@@ -21,11 +21,7 @@ export const metadata: Metadata = {
   description: "The most popular anime and manga site on the internet",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head />
@@ -41,7 +37,7 @@ export default function RootLayout({
             <main className="min-h-screen">{children}</main>
             <Footer />
             <ScrollToTop />
-            <Toaster position="top-right" />
+            <Toaster position="top-right" duration={2000} />
           </ThemeProvider>
         </Providers>
       </body>

@@ -4,12 +4,7 @@ import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 import type { TNowAnime, TUpcomingAnime } from "@/types";
 type TabsAnimeProps = {
@@ -21,16 +16,10 @@ export const TabsAnime = ({ dataNow, dataUpcoming }: TabsAnimeProps) => {
   return (
     <Tabs defaultValue="now" className="w-full lg:w-[50dvh]">
       <TabsList className="w-full">
-        <TabsTrigger
-          className="w-full uppercase font-semibold text-sm"
-          value="now"
-        >
+        <TabsTrigger className="w-full uppercase font-semibold text-sm" value="now">
           Season Now
         </TabsTrigger>
-        <TabsTrigger
-          className="w-full uppercase font-semibold text-sm"
-          value="upcoming"
-        >
+        <TabsTrigger className="w-full uppercase font-semibold text-sm" value="upcoming">
           Upcoming
         </TabsTrigger>
       </TabsList>
@@ -66,7 +55,7 @@ export const TabsAnime = ({ dataNow, dataUpcoming }: TabsAnimeProps) => {
                     </p>
                   </div>
                 </div>
-                {index !== dataNow.data.length - 1 ? (
+                {index !== dataNow.data?.length - 1 ? (
                   <Separator className="mt-3" />
                 ) : (
                   <Separator className="mt-3 bg-inherit dark:bg-inherit" />
@@ -108,7 +97,7 @@ export const TabsAnime = ({ dataNow, dataUpcoming }: TabsAnimeProps) => {
                     </p>
                   </div>
                 </div>
-                {index !== dataNow.data.length - 1 ? (
+                {index !== dataNow.data?.length - 1 ? (
                   <Separator className="mt-3" />
                 ) : (
                   <Separator className="mt-3 bg-inherit dark:bg-inherit" />

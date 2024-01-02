@@ -2,33 +2,20 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { reproduce } from "@/lib/apis";
 
 import type { TRecommendedAnime } from "@/types";
 
-export const AnimeRecommendations = ({
-  dataAnime,
-}: {
-  dataAnime: TRecommendedAnime[];
-}) => {
+export const AnimeRecommendations = ({ dataAnime }: { dataAnime: TRecommendedAnime[] }) => {
   const randomRecommendations = reproduce(dataAnime, 6);
 
   return (
     <>
       <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-5 md:mr-5">
-        {randomRecommendations.data.map((anime, index) => {
+        {randomRecommendations.data?.map((anime, index) => {
           return (
-            <Link
-              href={`/anime/${anime.mal_id}`}
-              className=" transition-all"
-              key={index}
-            >
+            <Link href={`/anime/${anime.mal_id}`} className=" transition-all" key={index}>
               <Card className="relative flex flex-col border-0 h-full justify-between bg-inherit p-1">
                 <CardContent className="p-0">
                   <Image
