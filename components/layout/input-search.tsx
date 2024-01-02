@@ -151,7 +151,7 @@ const DropdownContentSearch = ({
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [state]);
+  }, [state, dropdownRef, setDropdownContent]);
 
   return (
     <div className="absolute">
@@ -234,12 +234,20 @@ const DropdownContentSearch = ({
         {dataAnime && dataManga && !isLoading ? (
           <div className="py-2 text-xs font-normal">
             <Link href="/search/[keyword]" as={`/search/${query}`} className="hover:underline">
-              <p>View all results for "{query}"</p>
+              <p>
+                View all results for {'"'}
+                {query}
+                {'"'}
+              </p>
             </Link>
           </div>
         ) : (
           <div className="flex py-2 text-xs font-normal">
-            <p>View all results for "{query}"</p>
+            <p>
+              View all results for {'"'}
+              {query}
+              {'"'}
+            </p>
             <Loader2Icon className="w-4 h-4 animate-spin ml-1" />
           </div>
         )}

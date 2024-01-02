@@ -30,7 +30,7 @@ const Dashboard = async (props: Props) => {
             className="max-h-72 rounded hover-image"
           />
           <div className="flex flex-col w-full space-y-5 md:space-y-3 text-center sm:text-left">
-            <h1 className="text-3xl font-bold">Here's your Dashboard !</h1>
+            <h1 className="text-3xl font-bold">Here{"'"}s your Dashboard !</h1>
             <Separator />
             <div className="flex flex-col gap-1">
               <h3 className="text-xl font-semibold">{user?.name}</h3>

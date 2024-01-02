@@ -24,15 +24,12 @@ export const LogoutDialog = () => {
           <DialogTitle>Do you want to sign out?</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          Just click a red button if you want to sign out, but if you didn't
-          meant to sign out, just click another one or close this dialog.
+          Just click a red button if you want to sign out, but if you didn{"'"}t meant to sign out,
+          just click another one or close this dialog.
         </DialogDescription>
         <DialogFooter>
           <DialogClose asChild>
-            <Button
-              variant="destructive"
-              onClick={() => signOut({ callbackUrl: "/" })}
-            >
+            <Button variant="destructive" onClick={() => signOut({ callbackUrl: "/" })}>
               Sign Out
             </Button>
           </DialogClose>

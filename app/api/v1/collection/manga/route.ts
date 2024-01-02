@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import type { RequestCollection, TMangaCollection } from "@/types";
 
-export async function POST(req: RequestCollection<TMangaCollection>) {
+export async function POST(req: Request) {
   const { mal_id, image_url, title, user_email } = await req.json();
 
   const data = {

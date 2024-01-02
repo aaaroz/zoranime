@@ -1,22 +1,11 @@
 import Link from "next/link";
 import { formatDistanceStrict } from "date-fns/formatDistanceStrict";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import { StarRating } from "@/components/layout/star-rating";
 
 import type { TAnimeComment, TMangaComment } from "@/types";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 type Props = {
   data: TAnimeComment[];
@@ -28,9 +17,7 @@ const CommentLists = ({ data, dataManga }: Props) => {
     <>
       <div className="grid grid-cols-1 gap-4">
         <section id="anime">
-          <h1 className="text-lg md:text-xl font-semibold mb-5">
-            Anime Comment
-          </h1>
+          <h1 className="text-lg md:text-xl font-semibold mb-5">Anime Comment</h1>
           {data.length === 0 && (
             <div className="flex justify-center items-center h-[60dvh]">
               <h1 className="text-center text-neutral-600 dark:text-neutral-500">
@@ -67,7 +54,11 @@ const CommentLists = ({ data, dataManga }: Props) => {
                         </CardHeader>
                       </Tooltip>
                     </TooltipProvider>
-                    <CardDescription>"{item.comment}"</CardDescription>
+                    <CardDescription>
+                      {'"'}
+                      {item.comment}
+                      {'"'}
+                    </CardDescription>
                     <CardFooter className="p-0 py-2">
                       <span className="text-sm mr-3 text-neutral-600 dark:text-neutral-500">
                         Your rating :
@@ -84,9 +75,7 @@ const CommentLists = ({ data, dataManga }: Props) => {
           </div>
         </section>
         <section id="manga">
-          <h1 className="text-lg md:text-xl font-semibold mb-5">
-            Manga Comment
-          </h1>
+          <h1 className="text-lg md:text-xl font-semibold mb-5">Manga Comment</h1>
           {dataManga.length === 0 && (
             <div className="flex justify-center items-center h-[60dvh]">
               <h1 className="text-center text-neutral-600 dark:text-neutral-500">
@@ -123,7 +112,11 @@ const CommentLists = ({ data, dataManga }: Props) => {
                         </CardHeader>
                       </Tooltip>
                     </TooltipProvider>
-                    <CardDescription>"{item.comment}"</CardDescription>
+                    <CardDescription>
+                      {'"'}
+                      {item.comment}
+                      {'"'}
+                    </CardDescription>
                     <CardFooter className="p-0 py-2">
                       <span className="text-sm mr-3 text-neutral-600 dark:text-neutral-500">
                         Your rating :
