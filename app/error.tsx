@@ -1,9 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { HeroSmall } from "@/components/layout/hero-small";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const ErrorPage = ({ error }: { error: Error }) => {
   return (
