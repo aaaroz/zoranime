@@ -1,50 +1,65 @@
 import { TRecommendedAnime } from "@/types";
+import { unstable_noStore } from "next/cache";
 
 export const getMangaFullById = async (id: number | string) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/manga/${id}/full`
-  );
-  const manga = await response.json();
-  return manga;
+  unstable_noStore();
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/manga/${id}/full`);
+    const manga = await response.json();
+    return manga;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch Anime");
+  }
 };
 
 export const getAnimeFullById = async (id: number | string) => {
+  unstable_noStore();
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/anime/${id}/full`
-    );
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/anime/${id}/full`);
     const anime = await response.json();
     return anime;
   } catch (error) {
     console.error(error);
+    throw new Error("Failed to fetch Anime");
   }
 };
 
 export const getAnimeResponse = async (resource: string, query?: string) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}?${query}`
-  );
-  const anime = await response.json();
-  return anime;
+  unstable_noStore();
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}?${query}`);
+    const anime = await response.json();
+    return anime;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch Anime");
+  }
 };
 
 export const getRandomAnimeResponse = async (resource: string) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}`,
-    { next: { revalidate: 20 } }
-  );
-  const anime = await response.json();
-  return anime;
+  unstable_noStore();
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}`, {
+      next: { revalidate: 20 },
+    });
+    const anime = await response.json();
+    return anime;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch Anime");
+  }
 };
 
-export const getNestedAnimeResponse = async (
-  resource: string,
-  objectProperty: string
-) => {
-  const response = await getAnimeResponse(resource);
-  return response.data?.flatMap(
-    (item: { [key: string]: unknown }) => item[objectProperty]
-  );
+export const getNestedAnimeResponse = async (resource: string, objectProperty: string) => {
+  unstable_noStore();
+  try {
+    const response = await getAnimeResponse(resource);
+    return response.data?.flatMap((item: { [key: string]: unknown }) => item[objectProperty]);
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch Anime");
+  }
 };
 
 export const reproduce = (data: TRecommendedAnime[], gap: number) => {

@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import type { RequestComment, TAnimeComment } from "@/types";
 
 export async function POST(req: Request) {
   const { anime_mal_id, anime_title, user_image, username, user_email, comment, rating } =

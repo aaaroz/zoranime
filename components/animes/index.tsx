@@ -18,13 +18,11 @@ const AnimeLists = () => {
 
   const fetchAnime = useCallback(async () => {
     try {
-      const res = await getAnimeResponse(
-        "anime",
-        `limit=24&page=${currentPage}`
-      );
+      const res = await getAnimeResponse("anime", `limit=24&page=${currentPage}`);
       setDataAnime(res);
     } catch (err) {
       console.error(err);
+      throw new Error("Something went wrong");
     }
   }, [currentPage]);
 
@@ -33,17 +31,18 @@ const AnimeLists = () => {
   }, [currentPage, fetchAnime]);
   return (
     <>
-      {dataAnime && dataAnime.data?.length > 0 && (
+      {dataAnime && dataAnime.data?.length > 0 ? (
         <AnimeList api={dataAnime} large />
+      ) : (
+        <div>
+          <h1>Data Not Found</h1>
+        </div>
       )}
       {dataAnime && dataAnime.data?.length <= 0 && (
         <Card>
           <CardContent className="text-center py-10">
             <h1 className="text-3xl font-semibold">Data Not Found</h1>
-            <p>
-              Please try again! or you can check another page through this
-              pagination below!
-            </p>
+            <p>Please try again! or you can check another page through this pagination below!</p>
           </CardContent>
         </Card>
       )}

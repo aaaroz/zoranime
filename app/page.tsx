@@ -16,14 +16,14 @@ import { HeaderSection } from "@/components/landing-page/header-section";
 import { Suspense } from "react";
 
 export default async function Home() {
-  const topAnime: TTopAnime = await getAnimeResponse("top/anime", "limit=8");
-  const upcomingAnime: TUpcomingAnime = await getAnimeResponse(
+  const topAnime: TTopAnime | null = await getAnimeResponse("top/anime", "limit=8");
+  const upcomingAnime: TUpcomingAnime | null = await getAnimeResponse(
     "seasons/upcoming",
     "limit=5&filter=movie"
   );
-  const nowAnime: TNowAnime = await getAnimeResponse("seasons/now", "limit=5&filter=movie");
-  const animeForYou: TRandomAnime = await getRandomAnimeResponse("random/anime");
-  const recommendedAnime: TRecommendedAnime[] = await getNestedAnimeResponse(
+  const nowAnime: TNowAnime | null = await getAnimeResponse("seasons/now", "limit=5&filter=movie");
+  const animeForYou: TRandomAnime | null = await getRandomAnimeResponse("random/anime");
+  const recommendedAnime: TRecommendedAnime[] | null = await getNestedAnimeResponse(
     "recommendations/anime",
     "entry"
   );
@@ -34,22 +34,40 @@ export default async function Home() {
         <div className="flex flex-col lg:flex-row mx-5 gap-5 py-5 sm:mx-10 h-auto">
           <div className="block">
             <HeaderSection highlight="Top" title="Anime" href="/anime/top" />
-            <Suspense fallback={<div>Loading AnimeList...</div>}>
-              <AnimeList api={topAnime} />
-            </Suspense>
+            {topAnime ? (
+              <Suspense fallback={<div>Loading AnimeList...</div>}>
+                <AnimeList api={topAnime} />
+              </Suspense>
+            ) : (
+              <div className="flex h-screen justify-center text-xl">
+                <h1>Something went wrong! try again later!</h1>
+              </div>
+            )}
           </div>
           <aside>
-            <Suspense fallback={<div>Loading Tabs...</div>}>
-              <TabsAnime dataNow={nowAnime} dataUpcoming={upcomingAnime} />
-              <AnimeForYou dataAnime={animeForYou} />
-            </Suspense>
+            {nowAnime && upcomingAnime && animeForYou ? (
+              <Suspense fallback={<div>Loading Tabs...</div>}>
+                <TabsAnime dataNow={nowAnime} dataUpcoming={upcomingAnime} />
+                <AnimeForYou dataAnime={animeForYou} />
+              </Suspense>
+            ) : (
+              <div className="flex h-screen justify-center text-xl">
+                <h1>Something went wrong! try again later!</h1>
+              </div>
+            )}
           </aside>
         </div>
         <div className="block mx-2 sm:mx-10 pb-11">
           <HeaderSection highlight="Anime" title="Recommendations" href="/anime/recommendations" />
-          <Suspense fallback={<div>Loading Recommendations...</div>}>
-            <AnimeRecommendations dataAnime={recommendedAnime} />
-          </Suspense>
+          {recommendedAnime ? (
+            <Suspense fallback={<div>Loading Recommendations...</div>}>
+              <AnimeRecommendations dataAnime={recommendedAnime} />
+            </Suspense>
+          ) : (
+            <div className="flex h-screen justify-center text-xl">
+              <h1>Something went wrong! try again later!</h1>
+            </div>
+          )}
         </div>
       </section>
     </>
