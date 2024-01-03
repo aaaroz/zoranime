@@ -58,6 +58,7 @@ export const getNestedAnimeResponse = async (resource: string, objectProperty: s
       next: { revalidate: 1 },
     });
     const anime = await response.json();
+    console.log(anime);
     return anime.data?.flatMap((item: { [key: string]: unknown }) => item[objectProperty]);
   } catch (error) {
     console.error(error);
