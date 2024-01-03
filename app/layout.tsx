@@ -1,17 +1,18 @@
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
+// import { Poppins } from "next/font/google";
+import type { Metadata } from "next";
+
+import Providers from "@/components/auth/providers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
-import Providers from "@/components/auth/providers";
 import { Toaster } from "@/components/ui/sonner";
 
-const poppins = Poppins({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-});
+// const poppins = Poppins({
+//   weight: ["300", "400", "500", "600", "700"],
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head />
-      <body className={poppins.className}>
+      <body>
         <Providers>
           <ThemeProvider
             attribute="class"
