@@ -18,13 +18,6 @@ export const options: NextAuthOptions = {
     signIn: "/unAuthorized",
     error: "/unAuthorized",
   },
-  callbacks: {
-    async redirect({ url, baseUrl }) {
-      if (url.startsWith(baseUrl)) return url;
-      if (url.startsWith("/")) return new URL(url, baseUrl).toString();
 
-      return baseUrl;
-    },
-  },
   secret: process.env.NEXTAUTH_SECRET,
 };
