@@ -52,7 +52,6 @@ export const getRandomAnimeResponse = async (resource: string) => {
 };
 
 export const getNestedAnimeResponse = async (resource: string, objectProperty: string) => {
-  unstable_noStore();
   try {
     const response = await getAnimeResponse(resource);
     return response.data?.flatMap((item: { [key: string]: unknown }) => item[objectProperty]);
