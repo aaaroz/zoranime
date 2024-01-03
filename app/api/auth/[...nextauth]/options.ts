@@ -16,6 +16,7 @@ export const options: NextAuthOptions = {
 
   pages: {
     signIn: "/unAuthorized",
+    error: "/unAuthorized",
   },
   callbacks: {
     async redirect({ url, baseUrl }) {
