@@ -1,4 +1,4 @@
-import { TRecommendedAnime } from "@/types";
+import { TFullRecommendedAnime, TRecommendedAnime } from "@/types";
 import { unstable_noStore } from "next/cache";
 
 export const getMangaFullById = async (id: number | string) => {
@@ -70,7 +70,17 @@ export const getNestedAnimeResponse = async (resource: string, objectProperty: s
   }
 };
 
-export const reproduce = (data: TRecommendedAnime[], gap: number) => {
+type TReproduce = {
+  mal_id: "string";
+  entry: TRecommendedAnime[];
+  content: "string";
+  user: {
+    url: "string";
+    username: "string";
+  };
+};
+
+export const reproduce = (data: TReproduce[], gap: number) => {
   const first = ~~(Math.random() * (data?.length - gap) + 1);
   const last = first + gap;
 
