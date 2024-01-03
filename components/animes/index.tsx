@@ -31,13 +31,7 @@ const AnimeLists = () => {
   }, [currentPage, fetchAnime]);
   return (
     <>
-      {dataAnime && dataAnime.data?.length > 0 ? (
-        <AnimeList api={dataAnime} large />
-      ) : (
-        <div>
-          <h1>Data Not Found</h1>
-        </div>
-      )}
+      {dataAnime && dataAnime.data?.length > 0 && <AnimeList api={dataAnime} large />}
       {dataAnime && dataAnime.data?.length <= 0 && (
         <Card>
           <CardContent className="text-center py-10">

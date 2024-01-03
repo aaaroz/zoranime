@@ -23,7 +23,7 @@ export default async function Home() {
   );
   const nowAnime: TNowAnime | null = await getAnimeResponse("seasons/now", "limit=5&filter=movie");
   const animeForYou: TRandomAnime | null = await getRandomAnimeResponse("random/anime");
-  const recommendedAnime: TRecommendedAnime[] | null = await getNestedAnimeResponse(
+  const recommendedAnime: TRecommendedAnime[] = await getNestedAnimeResponse(
     "recommendations/anime",
     "entry"
   );
@@ -59,11 +59,9 @@ export default async function Home() {
         </div>
         <div className="block mx-2 sm:mx-10 pb-11">
           <HeaderSection highlight="Anime" title="Recommendations" href="/anime/recommendations" />
-          {recommendedAnime && (
-            <Suspense fallback={<div>Loading Recommendations...</div>}>
-              <AnimeRecommendations dataAnime={recommendedAnime} />
-            </Suspense>
-          )}
+          <Suspense fallback={<div>Loading Recommendations...</div>}>
+            <AnimeRecommendations dataAnime={recommendedAnime} />
+          </Suspense>
         </div>
       </section>
     </>
