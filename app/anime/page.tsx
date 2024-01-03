@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
 import { HeroSmall } from "@/components/layout/hero-small";
-import Loading from "./loading";
 const AnimeLists = dynamic(() => import("@/components/animes"));
 
 export const metadata: Metadata = {

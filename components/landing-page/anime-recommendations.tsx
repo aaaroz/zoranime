@@ -9,7 +9,6 @@ import type { TRecommendedAnime } from "@/types";
 
 export const AnimeRecommendations = ({ dataAnime }: { dataAnime: TRecommendedAnime[] }) => {
   const randomRecommendations = reproduce(dataAnime, 6);
-
   return (
     <>
       <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-5 md:mr-5">

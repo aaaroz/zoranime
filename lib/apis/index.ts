@@ -55,7 +55,11 @@ export const getNestedAnimeResponse = async (resource: string, objectProperty: s
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}`);
     const anime = await response.json();
-    return anime.data?.flatMap((item: { [key: string]: unknown }) => item[objectProperty]);
+    if (anime) {
+      return anime.data?.flatMap((item: { [key: string]: unknown }) => item[objectProperty]);
+    } else {
+      throw new Error("Anime not found");
+    }
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch Anime");

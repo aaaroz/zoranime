@@ -1,7 +1,12 @@
+import { Suspense } from "react";
+
+import { getAnimeResponse, getNestedAnimeResponse, getRandomAnimeResponse } from "@/lib/apis";
 import { AnimeList } from "@/components/layout/anime-list";
 import { TabsAnime } from "@/components/landing-page/anime-tabs";
 import { AnimeForYou } from "@/components/landing-page/anime-for-you";
-import { getAnimeResponse, getNestedAnimeResponse, getRandomAnimeResponse } from "@/lib/apis";
+import { AnimeRecommendations } from "@/components/landing-page/anime-recommendations";
+import { HeroSection } from "@/components/layout/hero-section";
+import { HeaderSection } from "@/components/landing-page/header-section";
 
 import type {
   TNowAnime,
@@ -10,10 +15,6 @@ import type {
   TTopAnime,
   TUpcomingAnime,
 } from "@/types";
-import { AnimeRecommendations } from "@/components/landing-page/anime-recommendations";
-import { HeroSection } from "@/components/layout/hero-section";
-import { HeaderSection } from "@/components/landing-page/header-section";
-import { Suspense } from "react";
 
 export default async function Home() {
   const topAnime: TTopAnime | null = await getAnimeResponse("top/anime", "limit=8");
@@ -59,9 +60,7 @@ export default async function Home() {
         </div>
         <div className="block mx-2 sm:mx-10 pb-11">
           <HeaderSection highlight="Anime" title="Recommendations" href="/anime/recommendations" />
-          <Suspense fallback={<div>Loading Recommendations...</div>}>
-            <AnimeRecommendations dataAnime={recommendedAnime} />
-          </Suspense>
+          <AnimeRecommendations dataAnime={recommendedAnime} />
         </div>
       </section>
     </>
