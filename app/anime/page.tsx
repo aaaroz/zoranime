@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
 import { HeroSmall } from "@/components/layout/hero-small";
+import { Suspense } from "react";
 const AnimeLists = dynamic(() => import("@/components/animes"));
 
 export const metadata: Metadata = {
@@ -13,7 +14,9 @@ const Animes = async () => {
     <>
       <HeroSmall title="All Anime" breadcrumb />
       <section className="px-5 md:px-10 bg-neutral-50 dark:bg-neutral-800 dark:text-white">
-        <AnimeLists />
+        <Suspense fallback={<div>Loading...</div>}>
+          <AnimeLists />
+        </Suspense>
       </section>
     </>
   );
