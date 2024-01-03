@@ -44,6 +44,7 @@ export const getRandomAnimeResponse = async (resource: string) => {
       next: { revalidate: 20 },
     });
     const anime = await response.json();
+
     return anime;
   } catch (error) {
     console.error(error);
@@ -54,11 +55,11 @@ export const getRandomAnimeResponse = async (resource: string) => {
 export const getNestedAnimeResponse = async (resource: string, objectProperty: string) => {
   unstable_noStore();
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}`, {
-      next: { revalidate: 1 },
-    });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}`);
     const anime = await response.json();
-    console.log(anime);
+    if (!anime) {
+      console.error(anime);
+    }
     return anime.data?.flatMap((item: { [key: string]: unknown }) => item[objectProperty]);
   } catch (error) {
     console.error(error);
