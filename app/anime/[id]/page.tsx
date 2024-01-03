@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 
 import AnimeDetail from "@/components/anime-detail";
 import { HeroSmall } from "@/components/layout/hero-small";
@@ -11,13 +11,23 @@ import type { TFullAnime } from "@/types";
 import { CommentSection } from "@/components/layout/comment-section";
 import { CommentInput } from "@/components/layout/comment-input";
 
-export const metadata: Metadata = {
-  title: "Anime Detail",
+type Props = {
+  params: { id: string };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = params.id;
+
+  const dataAnime = await getAnimeFullById(id);
+
+  return {
+    title: `${dataAnime.data?.title}`,
+  };
+}
 
 const Anime = async ({ params }: { params: { id: string } }) => {
   const dataAnime: TFullAnime = await getAnimeFullById(params.id);
-  metadata.title = dataAnime?.data?.title;
+  // metadata.title = dataAnime?.data?.title;
   const user = await authUserSession();
   const data = {
     user_email: user?.email as string,

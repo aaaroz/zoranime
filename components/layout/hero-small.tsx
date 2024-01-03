@@ -20,12 +20,7 @@ interface HeroSmallProps {
   breadcrumbPage?: string;
 }
 
-export const HeroSmall: FC<HeroSmallProps> = ({
-  title,
-  breadcrumb,
-  genres,
-  breadcrumbPage,
-}) => {
+export const HeroSmall: FC<HeroSmallProps> = ({ title, breadcrumb, genres, breadcrumbPage }) => {
   const path = usePathname();
   let arrayPath;
   if (breadcrumb || breadcrumbPage) {
@@ -49,19 +44,11 @@ export const HeroSmall: FC<HeroSmallProps> = ({
           className="min-h-[200px] w-auto object-cover hidden dark:block"
         />
         <div className="absolute top-20 md:top-28 left-10 md:left-20">
-          <h1 className="capitalize text-3xl font-bold text-black dark:text-white">
-            {title}
-          </h1>
+          <h1 className="capitalize text-3xl font-bold text-black dark:text-white">{title}</h1>
           {breadcrumb && arrayPath && <Breadcrumb path={arrayPath} />}
-          {breadcrumbPage && arrayPath && (
-            <Breadcrumb path={arrayPath} page={breadcrumbPage} />
-          )}
+          {breadcrumbPage && arrayPath && <Breadcrumb path={arrayPath} page={breadcrumbPage} />}
           {genres?.map((genre) => (
-            <Badge
-              key={genre.mal_id}
-              variant="secondary"
-              className="text-xs mr-1"
-            >
+            <Badge key={genre.mal_id} variant="secondary" className="text-xs mr-1">
               {genre.name}
             </Badge>
           ))}

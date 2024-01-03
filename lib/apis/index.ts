@@ -85,7 +85,7 @@ export const reproduce = (data: TReproduce[], gap: number) => {
   const last = first + gap;
 
   const response = {
-    data: data.slice(first, last),
+    data: data?.slice(first, last),
   };
 
   return response;

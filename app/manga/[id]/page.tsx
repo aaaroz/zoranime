@@ -10,13 +10,22 @@ import type { TFullManga } from "@/types";
 import { CommentSection } from "@/components/layout/comment-section";
 import { CommentInput } from "@/components/layout/comment-input";
 
-export const metadata: Metadata = {
-  title: "Manga Detail",
+type Props = {
+  params: { id: string };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const id = params.id;
+
+  const dataManga = await getMangaFullById(id);
+
+  return {
+    title: `${dataManga.data?.title}`,
+  };
+}
 
 const Manga = async ({ params }: { params: { id: string } }) => {
   const dataManga: TFullManga = await getMangaFullById(params.id);
-  metadata.title = dataManga.data.title;
   const user = await authUserSession();
   const data = {
     user_email: user?.email as string,
