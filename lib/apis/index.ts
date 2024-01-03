@@ -53,8 +53,9 @@ export const getRandomAnimeResponse = async (resource: string) => {
 
 export const getNestedAnimeResponse = async (resource: string, objectProperty: string) => {
   try {
-    const response = await getAnimeResponse(resource);
-    return response.data?.flatMap((item: { [key: string]: unknown }) => item[objectProperty]);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}`);
+    const anime = await response.json();
+    return anime.data?.flatMap((item: { [key: string]: unknown }) => item[objectProperty]);
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch Anime");
