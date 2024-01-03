@@ -59,14 +59,10 @@ export default async function Home() {
         </div>
         <div className="block mx-2 sm:mx-10 pb-11">
           <HeaderSection highlight="Anime" title="Recommendations" href="/anime/recommendations" />
-          {recommendedAnime ? (
+          {recommendedAnime && (
             <Suspense fallback={<div>Loading Recommendations...</div>}>
               <AnimeRecommendations dataAnime={recommendedAnime} />
             </Suspense>
-          ) : (
-            <div className="flex h-screen justify-center text-xl">
-              <h1>Something went wrong! try again later!</h1>
-            </div>
           )}
         </div>
       </section>

@@ -1,5 +1,5 @@
 import "./globals.css";
-// import { Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
 
 import Providers from "@/components/auth/providers";
@@ -9,10 +9,10 @@ import { Footer } from "@/components/layout/footer";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { Toaster } from "@/components/ui/sonner";
 
-// const poppins = Poppins({
-//   weight: ["300", "400", "500", "600", "700"],
-//   subsets: ["latin"],
-// });
+const poppins = Poppins({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head />
-      <body>
+      <body className={poppins.className}>
         <Providers>
           <ThemeProvider
             attribute="class"
