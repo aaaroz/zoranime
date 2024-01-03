@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
 
-import { HeroSmall } from "@/components/layout/hero-small";
 import RecommendedAnimeList from "@/components/anime-recommendation";
+import { HeroSmall } from "@/components/layout/hero-small";
 
 export const metadata: Metadata = {
   title: "Anime Recommendations",
