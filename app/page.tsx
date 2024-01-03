@@ -28,7 +28,7 @@ export default async function Home() {
     "recommendations/anime",
     "entry"
   );
-  console.log(recommendedAnime);
+  console.error(recommendedAnime);
   return (
     <>
       <HeroSection />

@@ -60,7 +60,10 @@ export const getNestedAnimeResponse = async (resource: string, objectProperty: s
     if (!anime) {
       console.error(anime);
     }
-    return anime.data?.flatMap((item: { [key: string]: unknown }) => item[objectProperty]);
+    const dataResponse = anime.data?.flatMap(
+      (item: { [key: string]: unknown }) => item[objectProperty]
+    );
+    return dataResponse;
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch Anime");
