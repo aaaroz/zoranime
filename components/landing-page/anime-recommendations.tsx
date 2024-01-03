@@ -12,7 +12,7 @@ export const AnimeRecommendations = ({ dataAnime }: { dataAnime: TRecommendedAni
   return (
     <>
       <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-5 md:mr-5">
-        {randomRecommendations.data?.map((anime, index) => {
+        {randomRecommendations.data.map((anime, index) => {
           return (
             <Link href={`/anime/${anime.mal_id}`} className=" transition-all" key={index}>
               <Card className="relative flex flex-col border-0 h-full justify-between bg-inherit p-1">

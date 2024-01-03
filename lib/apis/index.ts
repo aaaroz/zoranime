@@ -60,7 +60,7 @@ export const getNestedAnimeResponse = async (resource: string, objectProperty: s
     if (!anime) {
       console.error(anime);
     }
-    const dataResponse = anime.data?.flatMap(
+    const dataResponse = anime.data.flatMap(
       (item: { [key: string]: unknown }) => item[objectProperty]
     );
     return dataResponse;
@@ -75,7 +75,7 @@ export const reproduce = (data: TRecommendedAnime[], gap: number) => {
   const last = first + gap;
 
   const response = {
-    data: data?.slice(first, last),
+    data: data.slice(first, last),
   };
 
   return response;
