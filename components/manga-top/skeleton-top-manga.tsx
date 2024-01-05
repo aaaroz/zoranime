@@ -1,11 +1,13 @@
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { HeroSmall } from "@/components/layout/hero-small";
 
 const SkeletonTopManga = () => {
   const large = true;
   return (
     <>
+      <HeroSmall title="Top Anime" breadcrumb />
       <section className="px-5 md:px-10 bg-neutral-50 dark:bg-neutral-800 dark:text-white">
         <div
           className={cn(
