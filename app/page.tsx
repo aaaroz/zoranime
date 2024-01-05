@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import { getAnimeResponse, getRandomAnimeResponse } from "@/lib/apis";
 import { AnimeList } from "@/components/layout/anime-list";
 import { TabsAnime } from "@/components/landing-page/anime-tabs";
@@ -31,9 +29,7 @@ export default async function Home() {
           <div className="block">
             <HeaderSection highlight="Top" title="Anime" href="/anime/top" />
             {topAnime ? (
-              <Suspense fallback={<div>Loading AnimeList...</div>}>
-                <AnimeList api={topAnime} />
-              </Suspense>
+              <AnimeList api={topAnime} />
             ) : (
               <div className="flex h-screen justify-center text-xl">
                 <h1>Something went wrong! try again later!</h1>
@@ -42,10 +38,10 @@ export default async function Home() {
           </div>
           <aside>
             {nowAnime && upcomingAnime && animeForYou ? (
-              <Suspense fallback={<div>Loading Tabs...</div>}>
+              <>
                 <TabsAnime dataNow={nowAnime} dataUpcoming={upcomingAnime} />
                 <AnimeForYou dataAnime={animeForYou} />
-              </Suspense>
+              </>
             ) : (
               <div className="flex h-screen justify-center text-xl">
                 <h1>Something went wrong! try again later!</h1>
@@ -55,9 +51,7 @@ export default async function Home() {
         </div>
         <div className="block mx-2 sm:mx-10 pb-11">
           <HeaderSection highlight="Anime" title="Recommendations" href="/anime/recommendations" />
-          <Suspense fallback={<div>Loading...</div>}>
-            <Recommendations dataAnime={recommendAnime} />
-          </Suspense>
+          <Recommendations dataAnime={recommendAnime} />
         </div>
       </section>
     </>

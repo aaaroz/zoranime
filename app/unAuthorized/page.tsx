@@ -12,6 +12,7 @@ const UnAuthorized = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
   let pathname = "/";
+
   if (callbackUrl && callbackUrl !== "/") {
     const url = new URL(searchParams.get("callbackUrl")!);
     pathname = url.pathname;
