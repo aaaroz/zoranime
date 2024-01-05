@@ -1,11 +1,6 @@
 import { Suspense } from "react";
 
-import {
-  getAnimeResponse,
-  getNestedAnimeResponse,
-  getRandomAnimeResponse,
-  reproduce,
-} from "@/lib/apis";
+import { getAnimeResponse, getRandomAnimeResponse } from "@/lib/apis";
 import { AnimeList } from "@/components/layout/anime-list";
 import { TabsAnime } from "@/components/landing-page/anime-tabs";
 import { AnimeForYou } from "@/components/landing-page/anime-for-you";
@@ -13,16 +8,10 @@ import { Recommendations } from "@/components/landing-page/anime-recommendations
 import { HeroSection } from "@/components/layout/hero-section";
 import { HeaderSection } from "@/components/landing-page/header-section";
 
-import type {
-  TNowAnime,
-  TRandomAnime,
-  TRecommendedAnime,
-  TTopAnime,
-  TUpcomingAnime,
-} from "@/types";
+import type { TNowAnime, TRandomAnime, TTopAnime, TUpcomingAnime } from "@/types";
 
 export default async function Home() {
-  const topAnime: TTopAnime | null = await getAnimeResponse("top/anime", "limit=8");
+  const topAnime: TTopAnime | null = await getAnimeResponse("top/anime", "limit=8&filter=favorite");
   const upcomingAnime: TUpcomingAnime | null = await getAnimeResponse(
     "seasons/upcoming",
     "limit=5"

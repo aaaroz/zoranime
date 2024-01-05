@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import YouTube from "react-youtube";
-import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
 import { Badge } from "@/components/ui/badge";
@@ -12,22 +11,11 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import type { TFullAnime } from "@/types";
-import { CommentInput } from "../layout/comment-input";
-import { CommentSection } from "../layout/comment-section";
-
 const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
   let arrayPath;
   const path = usePathname();
   arrayPath = path.split("/").filter(Boolean);
 
-  const user = useSession();
-
-  const data = {
-    username: user.data?.user?.name as string,
-    user_email: user.data?.user?.email as string,
-    user_image: user.data?.user?.image as string,
-    anime_mal_id: arrayPath[1] as string,
-  };
   return (
     <>
       <div className="flex flex-col md:flex-row">
@@ -56,10 +44,7 @@ const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
         </Card>
       </div>
       <div className="flex flex-col items-center justify-center gap-2 py-5">
-        <Star
-          score={dataAnime.data.score}
-          scoredBy={dataAnime.data.scored_by}
-        />
+        <Star score={dataAnime.data.score} scoredBy={dataAnime.data.scored_by} />
         <div className="flex flex-row flex-wrap justify-center items-center gap-2 text-xs md:text-sm">
           <Badge>Rank #{dataAnime.data.rank}</Badge>
           <Badge>Popularity #{dataAnime.data.popularity}</Badge>
@@ -71,8 +56,7 @@ const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
       </div>
       <div className="py-8 pb-14 text-sm md:text-base">
         <h3>
-          {dataAnime.data.duration} | {dataAnime.data.rating} |{" "}
-          {dataAnime.data.status}
+          {dataAnime.data.duration} | {dataAnime.data.rating} | {dataAnime.data.status}
         </h3>
         <Separator className="my-2 dark:bg-slate-50" />
         <p className=" text-justify mt-2">{dataAnime.data.synopsis}</p>

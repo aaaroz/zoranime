@@ -1,45 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { FC } from "react";
 
-import { getAnimeResponse } from "@/lib/apis";
+import { useDataAnime } from "@/lib/hooks/useDataAnime";
 import { AnimeList } from "@/components/layout/anime-list";
-import { Card, CardContent } from "@/components/ui/card";
+import { DataNotFound } from "@/components/layout/data-not-found";
 import { CustomPagination } from "@/components/layout/custom-pagination";
 
-import type { TAnime } from "@/types";
-
-const AnimeLists = () => {
-  const searchParams = useSearchParams();
-  const pageNumberLimit = 5;
-  const currentPage = Number(searchParams?.get("page")) || 1;
-  const [dataAnime, setDataAnime] = useState<TAnime | null>(null);
-
-  const fetchAnime = useCallback(async () => {
-    try {
-      const res = await getAnimeResponse("anime", `limit=24&page=${currentPage}`);
-      setDataAnime(res);
-    } catch (err) {
-      console.error(err);
-      throw new Error("Something went wrong");
-    }
-  }, [currentPage]);
-
-  useEffect(() => {
-    fetchAnime();
-  }, [currentPage, fetchAnime]);
+const AnimeLists: FC = () => {
+  const { dataAnime, pageNumberLimit, currentPage } = useDataAnime("anime");
   return (
     <>
       {dataAnime && dataAnime.data?.length > 0 && <AnimeList api={dataAnime} large />}
-      {dataAnime && dataAnime.data?.length <= 0 && (
-        <Card>
-          <CardContent className="text-center py-10">
-            <h1 className="text-3xl font-semibold">Data Not Found</h1>
-            <p>Please try again! or you can check another page through this pagination below!</p>
-          </CardContent>
-        </Card>
-      )}
+      {dataAnime && dataAnime.data?.length <= 0 && <DataNotFound />}
       {dataAnime?.pagination?.last_visible_page && (
         <CustomPagination
           currentPage={currentPage}

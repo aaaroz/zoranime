@@ -1,9 +1,7 @@
+import SkeletonMangaDetail from "@/components/manga-detail/skeleton-manga-detail";
+
 const Loading = () => {
-  return (
-    <section className="h-screen flex justify-center items-center">
-      <span className="loader border-b-red-600"></span>
-    </section>
-  );
+  return <SkeletonMangaDetail />;
 };
 
 export default Loading;

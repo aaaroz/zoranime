@@ -17,7 +17,7 @@ import { IoSearch } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 
 import { getAnimeResponse } from "@/lib/apis";
-import { useDebounce } from "@/lib/hooks/useDebounce";
+import { useDebounce } from "@/lib/hooks";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 

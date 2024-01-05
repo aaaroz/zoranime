@@ -1,9 +1,7 @@
+import SkeletonAnimeDetail from "@/components/anime-detail/skeleton-anime-detail";
+
 const Loading = () => {
-  return (
-    <section className="h-screen flex justify-center items-center">
-      <span className="loader border-b-red-600"></span>
-    </section>
-  );
+  return <SkeletonAnimeDetail />;
 };
 
 export default Loading;

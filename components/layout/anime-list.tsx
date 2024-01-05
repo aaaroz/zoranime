@@ -2,19 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Star } from "@/components/ui/star";
 
 import type { TAnime, TTopAnime } from "@/types";
@@ -36,11 +25,7 @@ export const AnimeList: FC<AnimeListProps> = ({ api, large }) => {
       >
         {api.data?.map((anime, index) => {
           return (
-            <Link
-              href={`/anime/${anime.mal_id}`}
-              className=" transition-all"
-              key={index}
-            >
+            <Link href={`/anime/${anime.mal_id}`} className=" transition-all" key={index}>
               <Card className="flex flex-col border-none h-full justify-between bg-transparent ">
                 <CardContent className="p-0">
                   <Image
@@ -59,15 +44,11 @@ export const AnimeList: FC<AnimeListProps> = ({ api, large }) => {
                     <Tooltip>
                       <TooltipTrigger>
                         <CardTitle className="line-clamp-1 p-0 text-start text-base sm:text-xl transition-all dark:text-neutral-50 dark:hover:text-red-700 text-neutral-950 hover:text-red-700">
-                          {anime.title_english
-                            ? anime.title_english
-                            : anime.title}
+                          {anime.title_english ? anime.title_english : anime.title}
                         </CardTitle>
                       </TooltipTrigger>
                       <TooltipContent>
-                        {anime.title_english
-                          ? anime.title_english
-                          : anime.title}
+                        {anime.title_english ? anime.title_english : anime.title}
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>

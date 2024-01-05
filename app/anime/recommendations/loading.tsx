@@ -1,9 +1,7 @@
+import SkeletonListRecommended from "@/components/anime-recommendation/skeleton-list-recommended";
+
 const Loading = () => {
-  return (
-    <section className="h-screen flex justify-center items-center">
-      <span className="loader border-b-red-600"></span>
-    </section>
-  );
+  return <SkeletonListRecommended />;
 };
 
 export default Loading;

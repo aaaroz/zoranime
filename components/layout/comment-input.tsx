@@ -1,18 +1,15 @@
 "use client";
 
-import {
-  ChangeEventHandler,
-  FormEventHandler,
-  MouseEventHandler,
-  useState,
-} from "react";
+import { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { toast } from "sonner";
+import { IoWarning } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 import APIComment from "@/lib/apis/comment";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import type { TAnimeComment, TMangaComment } from "@/types";
 import { StarRatingInput } from "./star-rating-input";
+
+import type { TAnimeComment, TMangaComment } from "@/types";
 
 interface CommentInputProps {
   data?: Omit<TAnimeComment, "comment" | "rating">;
@@ -45,6 +42,7 @@ export const CommentInput = ({ data, dataManga }: CommentInputProps) => {
     comment,
     rating,
   };
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -60,7 +58,7 @@ export const CommentInput = ({ data, dataManga }: CommentInputProps) => {
     if (rating < 1) {
       setErrors({
         rating: {
-          message: "Rating must be at least 1",
+          message: "Minimum rating is 1",
         },
       });
       return;
@@ -122,12 +120,14 @@ export const CommentInput = ({ data, dataManga }: CommentInputProps) => {
         />
         <div className="py-1">
           {errors?.comment?.message && (
-            <p className="text-red-600 text-sm font-medium">
+            <p className="text-red-600 flex items-center gap-2 text-sm font-normal bg-red-200 p-2 rounded border border-red-500">
+              <IoWarning className="text-lg" />
               {errors.comment.message}
             </p>
           )}
           {errors?.rating?.message && (
-            <p className="text-red-600 text-sm font-medium">
+            <p className="text-red-600 flex items-center gap-2 text-sm font-normal bg-red-200 p-2 rounded border border-red-500">
+              <IoWarning className="text-lg" />
               {errors.rating.message}
             </p>
           )}

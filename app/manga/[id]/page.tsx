@@ -6,9 +6,10 @@ import { authUserSession } from "@/lib/utils";
 import { getMangaFullById } from "@/lib/apis";
 import { HeroSmall } from "@/components/layout/hero-small";
 import { ButtonAddCollection } from "@/components/layout/button-add-collection";
-import type { TFullManga } from "@/types";
 import { CommentSection } from "@/components/layout/comment-section";
 import { CommentInput } from "@/components/layout/comment-input";
+
+import type { TFullManga } from "@/types";
 
 type Props = {
   params: { id: string };

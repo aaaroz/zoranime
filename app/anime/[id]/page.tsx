@@ -1,15 +1,15 @@
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 import AnimeDetail from "@/components/anime-detail";
-import { HeroSmall } from "@/components/layout/hero-small";
-import { getAnimeFullById } from "@/lib/apis";
-import { ButtonAddCollection } from "@/components/layout/button-add-collection";
-
 import prisma from "@/lib/prisma";
+import { getAnimeFullById } from "@/lib/apis";
 import { authUserSession } from "@/lib/utils";
-import type { TFullAnime } from "@/types";
+import { ButtonAddCollection } from "@/components/layout/button-add-collection";
 import { CommentSection } from "@/components/layout/comment-section";
 import { CommentInput } from "@/components/layout/comment-input";
+import { HeroSmall } from "@/components/layout/hero-small";
+
+import type { TFullAnime } from "@/types";
 
 type Props = {
   params: { id: string };
@@ -27,7 +27,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const Anime = async ({ params }: { params: { id: string } }) => {
   const dataAnime: TFullAnime = await getAnimeFullById(params.id);
-  // metadata.title = dataAnime?.data?.title;
   const user = await authUserSession();
   const data = {
     user_email: user?.email as string,
