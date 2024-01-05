@@ -37,7 +37,8 @@ export default async function Home() {
   //   "recommendations/anime",
   //   "entry"
   // );
-  const recommendAnime = await getAnimeResponse("recommendations/anime");
+  const recommendAnime = await getAnimeResponse("recommendations/anime", "page=1");
+  console.log(recommendAnime);
   return (
     <>
       <HeroSection />
@@ -69,9 +70,11 @@ export default async function Home() {
           </aside>
         </div>
         <div className="block mx-2 sm:mx-10 pb-11">
-          {/* <HeaderSection highlight="Anime" title="Recommendations" href="/anime/recommendations" /> */}
+          <HeaderSection highlight="Anime" title="Recommendations" href="/anime/recommendations" />
           {/* <AnimeRecommendations dataAnime={recommendedAnime} /> */}
-          {/* <Recommendations dataAnime={recommendAnime} /> */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Recommendations dataAnime={recommendAnime} />
+          </Suspense>
         </div>
       </section>
     </>
@@ -79,10 +82,10 @@ export default async function Home() {
 }
 
 const Recommendations = ({ dataAnime }: any) => {
-  const dataAnimes = reproduce(dataAnime.data, 6);
+  const dataAnimes = dataAnime.data?.slice(10, 16);
   return (
     <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-5 md:mr-5">
-      {dataAnimes.data?.map((anime: any, index: number) => {
+      {dataAnimes?.map((anime: any, index: number) => {
         return (
           <Link href={`/anime/${anime.entry[0].mal_id}`} className=" transition-all" key={index}>
             <Card className="relative flex flex-col border-0 h-full justify-between bg-inherit p-1">

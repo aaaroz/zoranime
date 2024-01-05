@@ -81,7 +81,7 @@ type TReproduce = {
 };
 
 export const reproduce = (data: TReproduce[], gap: number) => {
-  const first = ~~(Math.random() * (data?.length - gap) + 1);
+  const first = ~~(Math.random() * (data?.length - gap) + 1) ?? 1;
   const last = first + gap;
 
   const response = {
