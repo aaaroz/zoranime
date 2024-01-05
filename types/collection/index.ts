@@ -13,7 +13,3 @@ export type TMangaCollection = {
   title?: string | null;
   user_email: string;
 };
-
-export interface RequestCollection<T> {
-  json(): T | PromiseLike<T>;
-}

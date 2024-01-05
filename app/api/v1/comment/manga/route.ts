@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import type { RequestComment, TMangaComment } from "@/types";
 
 export async function POST(req: Request) {
   const { mal_id, title, user_image, username, user_email, comment, rating } = await req.json();

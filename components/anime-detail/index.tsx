@@ -20,7 +20,11 @@ const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
     <>
       <div className="flex flex-col md:flex-row">
         <Image
-          src={dataAnime.data.images.webp.large_image_url}
+          src={
+            dataAnime.data.images.webp.large_image_url
+              ? dataAnime.data.images.webp.large_image_url
+              : dataAnime.data.images.jpg.large_image_url
+          }
           alt="image"
           width={500}
           height={350}

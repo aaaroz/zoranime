@@ -21,6 +21,3 @@ export type TMangaComment = {
   rating: number;
   createdAt?: Date | null;
 };
-export type RequestComment<T> = {
-  json(): T | PromiseLike<T>;
-};
