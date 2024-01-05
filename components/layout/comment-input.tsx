@@ -58,7 +58,7 @@ export const CommentInput = ({ data, dataManga }: CommentInputProps) => {
     if (rating < 1) {
       setErrors({
         rating: {
-          message: "Minimum rating is 1",
+          message: "You need to give a rating",
         },
       });
       return;
