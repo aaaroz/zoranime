@@ -26,8 +26,8 @@ export const ButtonAddCollection = ({ data, dataManga }: Props) => {
         success: (data) => `${data.message}`,
         error: "Failed to add to Collection",
         finally: () => {
-          setIsSubmitting(false);
           router.refresh();
+          setIsSubmitting(false);
         },
       });
     }
@@ -37,8 +37,8 @@ export const ButtonAddCollection = ({ data, dataManga }: Props) => {
         success: (data) => `${data.message}`,
         error: "Failed to add to Collection",
         finally: () => {
-          setIsSubmitting(false);
           router.refresh();
+          setIsSubmitting(false);
         },
       });
     }

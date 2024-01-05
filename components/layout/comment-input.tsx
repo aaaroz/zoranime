@@ -69,10 +69,10 @@ export const CommentInput = ({ data, dataManga }: CommentInputProps) => {
         success: (data) => `${data.message}`,
         error: "Failed to add comment",
         finally: () => {
+          router.refresh();
           setIsSubmitting(false);
           setComment("");
           setRating(0);
-          router.refresh();
         },
       });
     }
@@ -82,10 +82,10 @@ export const CommentInput = ({ data, dataManga }: CommentInputProps) => {
         success: (data) => `${data.message}`,
         error: "Failed to add comment",
         finally: () => {
+          router.refresh();
           setIsSubmitting(false);
           setComment("");
           setRating(0);
-          router.refresh();
         },
       });
     }
