@@ -29,15 +29,18 @@ export default async function Home() {
   const topAnime: TTopAnime | null = await getAnimeResponse("top/anime", "limit=8");
   const upcomingAnime: TUpcomingAnime | null = await getAnimeResponse(
     "seasons/upcoming",
-    "limit=5&filter=movie"
+    "limit=5"
   );
-  const nowAnime: TNowAnime | null = await getAnimeResponse("seasons/now", "limit=5&filter=movie");
+  const nowAnime: TNowAnime | null = await getAnimeResponse("seasons/now", "limit=5");
   const animeForYou: TRandomAnime | null = await getRandomAnimeResponse("random/anime");
   // const recommendedAnime: TRecommendedAnime[] = await getNestedAnimeResponse(
   //   "recommendations/anime",
   //   "entry"
   // );
-  const recommendAnime = await getAnimeResponse("recommendations/anime", "page=1");
+  const recommendAnime: TTopAnime = await getAnimeResponse(
+    "top/anime",
+    "limit=6&filter=bypopularity"
+  );
   console.log(recommendAnime);
   return (
     <>
@@ -81,17 +84,20 @@ export default async function Home() {
   );
 }
 
-const Recommendations = ({ dataAnime }: any) => {
-  const dataAnimes = dataAnime.data?.slice(10, 16);
+type Recommendations = {
+  dataAnime: TTopAnime;
+};
+
+const Recommendations = ({ dataAnime }: Recommendations) => {
   return (
     <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mt-5 md:mr-5">
-      {dataAnimes?.map((anime: any, index: number) => {
+      {dataAnime.data?.map((anime, index) => {
         return (
-          <Link href={`/anime/${anime.entry[0].mal_id}`} className=" transition-all" key={index}>
+          <Link href={`/anime/${anime.mal_id}`} className=" transition-all" key={index}>
             <Card className="relative flex flex-col border-0 h-full justify-between bg-inherit p-1">
               <CardContent className="p-0">
                 <Image
-                  src={anime.entry[0].images.webp.large_image_url}
+                  src={anime.images.webp.large_image_url}
                   alt="image"
                   width={150}
                   height={350}
@@ -102,10 +108,10 @@ const Recommendations = ({ dataAnime }: any) => {
                     <Tooltip>
                       <TooltipTrigger>
                         <CardTitle className="line-clamp-1 ps-1 text-start text-base sm:text-xl transition-all dark:text-neutral-50 dark:hover:text-red-700 text-neutral-50 hover:text-red-700">
-                          {anime.entry[0].title}
+                          {anime.title}
                         </CardTitle>
                       </TooltipTrigger>
-                      <TooltipContent>{anime.entry[0].title}</TooltipContent>
+                      <TooltipContent>{anime.title}</TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
                 </CardHeader>
