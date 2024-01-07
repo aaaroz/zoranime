@@ -2,21 +2,25 @@
 
 import { FC } from "react";
 
-import { useDataAnime } from "@/lib/hooks";
+import { useDataPagination } from "@/lib/hooks";
 import { AnimeList } from "@/components/layout/anime-list";
 import { DataNotFound } from "@/components/layout/data-not-found";
 import { CustomPagination } from "@/components/layout/custom-pagination";
+import { TTopAnime } from "@/types";
 
 const TopAnimeList: FC = () => {
-  const { dataAnime, currentPage, pageNumberLimit } = useDataAnime("top/anime");
+  const { dataState, currentPage, pageNumberLimit } = useDataPagination<TTopAnime>(
+    "top/anime",
+    "limit=24"
+  );
   return (
     <>
-      {dataAnime && dataAnime.data?.length > 0 && <AnimeList api={dataAnime} large />}
-      {dataAnime && dataAnime.data?.length <= 0 && <DataNotFound />}
-      {dataAnime?.pagination?.last_visible_page && (
+      {dataState && dataState.data?.length > 0 && <AnimeList api={dataState} large />}
+      {dataState && dataState.data?.length <= 0 && <DataNotFound />}
+      {dataState?.pagination?.last_visible_page && (
         <CustomPagination
           currentPage={currentPage}
-          lastPage={dataAnime?.pagination?.last_visible_page}
+          lastPage={dataState?.pagination?.last_visible_page}
           pageNumberLimit={pageNumberLimit}
         />
       )}

@@ -1,22 +1,22 @@
 "use client";
 
-import { useAnimeRecommended } from "@/lib/hooks";
 import { DataNotFound } from "@/components/layout/data-not-found";
 import { CustomPagination } from "@/components/layout/custom-pagination";
 import { ListRecommended } from "./list-recommended";
+import { TFullRecommendedAnime } from "@/types";
+import { useDataPagination } from "@/lib/hooks";
 
 const RecommendedAnimeList = () => {
-  const { dataRecommendedAnime, pageNumberLimit, currentPage } = useAnimeRecommended();
+  const { dataState, pageNumberLimit, currentPage } =
+    useDataPagination<TFullRecommendedAnime>("recommendations/anime");
   return (
     <>
-      {dataRecommendedAnime && dataRecommendedAnime.data?.length > 0 && (
-        <ListRecommended dataAnime={dataRecommendedAnime} />
-      )}
-      {dataRecommendedAnime && dataRecommendedAnime.data?.length <= 0 && <DataNotFound />}
-      {dataRecommendedAnime?.pagination?.last_visible_page && (
+      {dataState && dataState.data?.length > 0 && <ListRecommended dataAnime={dataState} />}
+      {dataState && dataState.data?.length <= 0 && <DataNotFound />}
+      {dataState?.pagination?.last_visible_page && (
         <CustomPagination
           currentPage={currentPage}
-          lastPage={dataRecommendedAnime?.pagination?.last_visible_page}
+          lastPage={dataState?.pagination?.last_visible_page}
           pageNumberLimit={pageNumberLimit}
         />
       )}

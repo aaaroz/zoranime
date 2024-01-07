@@ -1,4 +1,3 @@
-export * from "./useDataAnime";
+export * from "./useDataPagination";
 export * from "./useDebounce";
-export * from "./useAnimeRecommended";
-export * from "./useDataManga";
+export * from "./useMediaQuery";

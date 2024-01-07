@@ -27,7 +27,7 @@ export const LogoutDialog = () => {
           Just click a red button if you want to sign out, but if you didn{"'"}t meant to sign out,
           just click another one or close this dialog.
         </DialogDescription>
-        <DialogFooter>
+        <DialogFooter className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end sm:space-x-2">
           <DialogClose asChild>
             <Button variant="destructive" onClick={() => signOut({ callbackUrl: "/" })}>
               Sign Out

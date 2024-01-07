@@ -2,21 +2,25 @@
 
 import { FC } from "react";
 
-import { useDataManga } from "@/lib/hooks";
+import { useDataPagination } from "@/lib/hooks";
 import { CustomPagination } from "@/components/layout/custom-pagination";
 import { MangaList } from "@/components/layout/manga-list";
 import { DataNotFound } from "@/components/layout/data-not-found";
+import { TManga } from "@/types";
 
 const MangaLists: FC = () => {
-  const { dataManga, pageNumberLimit, currentPage } = useDataManga("manga");
+  const { dataState, pageNumberLimit, currentPage } = useDataPagination<TManga>(
+    "manga",
+    "limit=24"
+  );
   return (
     <>
-      {dataManga && dataManga.data?.length > 0 && <MangaList api={dataManga} large />}
-      {dataManga && dataManga.data?.length <= 0 && <DataNotFound />}
-      {dataManga?.pagination?.last_visible_page && (
+      {dataState && dataState.data?.length > 0 && <MangaList api={dataState} large />}
+      {dataState && dataState.data?.length <= 0 && <DataNotFound />}
+      {dataState?.pagination?.last_visible_page && (
         <CustomPagination
           currentPage={currentPage}
-          lastPage={dataManga?.pagination?.last_visible_page}
+          lastPage={dataState?.pagination?.last_visible_page}
           pageNumberLimit={pageNumberLimit}
         />
       )}
