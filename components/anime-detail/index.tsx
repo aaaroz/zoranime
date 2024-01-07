@@ -23,7 +23,7 @@ const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
           src={
             dataAnime.data.images.webp.large_image_url
               ? dataAnime.data.images.webp.large_image_url
-              : dataAnime.data.images.jpg.large_image_url
+              : dataAnime.data.images.webp.image_url
           }
           alt="image"
           width={500}
