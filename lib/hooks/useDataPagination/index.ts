@@ -22,7 +22,7 @@ export function useDataPagination<T>(request: string, query?: string) {
       console.error(err);
       throw new Error("Something went wrong");
     }
-  }, [currentPage]);
+  }, [currentPage, query, request]);
 
   useEffect(() => {
     fetchData();
