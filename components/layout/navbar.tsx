@@ -38,7 +38,7 @@ export const Navbar: FC = () => {
             <li>
               <DropdownMenu>
                 <DropdownMenuTrigger className="ps-2 flex items-center outline-none transition-all hover:text-red-600">
-                  <span>Top Lists</span>
+                  <span>More</span>
                   <ChevronDown className="ml-1" size={16} />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
@@ -47,6 +47,9 @@ export const Navbar: FC = () => {
                   </Link>
                   <Link href="/manga/top">
                     <DropdownMenuItem>Top Manga</DropdownMenuItem>
+                  </Link>
+                  <Link href="/anime/recommendations">
+                    <DropdownMenuItem>Recommended Anime</DropdownMenuItem>
                   </Link>
                 </DropdownMenuContent>
               </DropdownMenu>

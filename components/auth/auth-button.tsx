@@ -20,7 +20,7 @@ export const AuthButton = async () => {
       <DropdownMenuTrigger className="px-3 py-2 rounded-md border transition-all duration-500 hover:text-red-600 dark:hover:text-red-600 dark:border-none dark:bg-black dark:hover:bg-neutral-800">
         <CircleUserRoundIcon className="w-5 h-5" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent alignOffset={5} align="end">
+      <DropdownMenuContent align="end">
         {user ? (
           <>
             <div className="w-[50dvh] flex items-center gap-3 p-3">
@@ -34,13 +34,9 @@ export const AuthButton = async () => {
               <div className="flex flex-col">
                 <h1 className="text-lg font-semibold">
                   Welcome,{" "}
-                  {user.name?.split(" ")[1]
-                    ? user.name?.split(" ")[1]
-                    : user.name?.split(" ")[0]}
+                  {user.name?.split(" ")[1] ? user.name?.split(" ")[1] : user.name?.split(" ")[0]}
                 </h1>
-                <p className="text-xs text-neutral-500">
-                  {user.email as string}
-                </p>
+                <p className="text-xs text-neutral-500">{user.email as string}</p>
               </div>
             </div>
           </>
