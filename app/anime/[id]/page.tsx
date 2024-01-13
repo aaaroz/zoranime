@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const dataAnime = await getAnimeFullById(id);
 
   return {
-    title: `${dataAnime.data?.title}`,
+    title: `${dataAnime.data?.title}` || "Anime",
   };
 }
 

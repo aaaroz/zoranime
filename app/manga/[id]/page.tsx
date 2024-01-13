@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const dataManga = await getMangaFullById(id);
 
   return {
-    title: `${dataManga.data?.title}`,
+    title: `${dataManga.data?.title}` || "Manga",
   };
 }
 
