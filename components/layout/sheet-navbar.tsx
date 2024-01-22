@@ -38,7 +38,7 @@ export const SheetNavbar = () => {
                 className="border-none p-0 flex flex-col items-center justify-center sm:items-start"
               >
                 <AccordionTrigger className="py-2 w-full hover:text-red-600 dark:text-white dark:hover:text-red-600 transition-all duration-500 cursor-pointer">
-                  <p>Top Lists</p>
+                  <p>More</p>
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col w-full">
                   <Link
@@ -52,6 +52,12 @@ export const SheetNavbar = () => {
                     className="py-2 hover:text-red-600 dark:text-white dark:hover:text-red-600 transition-all duration-500 cursor-pointer"
                   >
                     Top Manga
+                  </Link>
+                  <Link
+                    href="/anime/recommendations"
+                    className="py-2 hover:text-red-600 dark:text-white dark:hover:text-red-600 transition-all duration-500 cursor-pointer"
+                  >
+                    Recommended Anime
                   </Link>
                 </AccordionContent>
               </AccordionItem>
