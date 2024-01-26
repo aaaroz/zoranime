@@ -23,10 +23,19 @@ export const metadata: Metadata = {
   description: "The most popular anime and manga site on the internet",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <head />
+      <head>
+        <meta
+          name="google-site-verification"
+          content="ihCWTRC0MEpqWPZLR_TD8czCoqLJNWvojV-wthtZMQk"
+        />
+      </head>
       <body className={poppins.className} suppressHydrationWarning>
         <Providers>
           <ThemeProvider

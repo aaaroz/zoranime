@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import type { TFullAnime } from "@/types";
+
 const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
   let arrayPath;
   const path = usePathname();
@@ -48,7 +49,10 @@ const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
         </Card>
       </div>
       <div className="flex flex-col items-center justify-center gap-2 py-5">
-        <Star score={dataAnime.data.score} scoredBy={dataAnime.data.scored_by} />
+        <Star
+          score={dataAnime.data.score}
+          scoredBy={dataAnime.data.scored_by}
+        />
         <div className="flex flex-row flex-wrap justify-center items-center gap-2 text-xs md:text-sm">
           <Badge>Rank #{dataAnime.data.rank}</Badge>
           <Badge>Popularity #{dataAnime.data.popularity}</Badge>
@@ -60,7 +64,8 @@ const AnimeDetail = ({ dataAnime }: { dataAnime: TFullAnime }) => {
       </div>
       <div className="py-8 pb-14 text-sm md:text-base">
         <h3>
-          {dataAnime.data.duration} | {dataAnime.data.rating} | {dataAnime.data.status}
+          {dataAnime.data.duration} | {dataAnime.data.rating} |{" "}
+          {dataAnime.data.status}
         </h3>
         <Separator className="my-2 dark:bg-slate-50" />
         <p className=" text-justify mt-2">{dataAnime.data.synopsis}</p>
